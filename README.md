@@ -10,6 +10,9 @@
 
 ### [Join our Discord](https://discord.gg/sJmhkpECmM)
 
+[![KataReborn's GitHub stats](https://github-readme-stats.vercel.app/api?username=KataReborn267)](https://github.com/KataReborn267/Poly-Crafting-Idle)
+
+
 ## What is it?
 Currently in development, Poly-Crafting-Idle is a game framework for creating low-poly games in UnityEngine with procedural
 generation and physics simulation capabilities. It provides the utilities and systems for designing these low-poly

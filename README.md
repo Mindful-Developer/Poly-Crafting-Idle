@@ -10,7 +10,7 @@
 
 ### [Join our Discord](https://discord.gg/sJmhkpECmM)
 
-[![KataReborn's GitHub stats](https://github-readme-stats.vercel.app/api?username=KataReborn267)](https://github.com/KataReborn267/Poly-Crafting-Idle)
+[![Poly Crafting Idles's Stats](https://github-readme-stats.vercel.app/api?username=KataReborn267)](https://github.com/KataReborn267/Poly-Crafting-Idle)
 
 
 ## What is it?

@@ -11,7 +11,7 @@
 ### [Join our Discord](https://discord.gg/sJmhkpECmM)
 
 [![Poly Crafting Idles's Stats](https://github-readme-stats.vercel.app/api?username=KataReborn267&theme=radical)](https://github.com/KataReborn267/Poly-Crafting-Idle)
-[![Poly Crafting Idles's Stats](https://github-readme-stats.vercel.app/api?username=gamingbuddhist&theme=radical)](https://github.com/KataReborn267/Poly-Crafting-Idle)
+[![Poly Crafting Idles's Stats](https://github-readme-stats.vercel.app/api?username=gamingbuddhist&theme=radical)](https://https://github.com/gamingbuddhist)
 
 
 ## What is it?

@@ -30,6 +30,7 @@ ExportedObj/
 .consulo/
 *.csproj
 *.unityproj
+*.meta
 *.sln
 *.suo
 *.tmp

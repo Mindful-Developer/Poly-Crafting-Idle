@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Planet : MonoBehaviour
+public class PlanetSpace : MonoBehaviour
 {
     public Material icoMats;
     GameObject icoPlanetMesh;
@@ -13,7 +13,7 @@ public class Planet : MonoBehaviour
     public void Start()
     {
         initAsIco();
-        triDivide(6);
+        triDivide(3);
         genIcoMesh();
     }
 
@@ -114,7 +114,7 @@ public class Planet : MonoBehaviour
             Destroy(icoPlanetMesh);
         }
 
-        icoPlanetMesh = new GameObject("Planet Mesh");
+        icoPlanetMesh = new GameObject("Planet Space Mesh");
 
         MeshRenderer surfaceRenderer = icoPlanetMesh.AddComponent<MeshRenderer>();
         surfaceRenderer.material = icoMats;

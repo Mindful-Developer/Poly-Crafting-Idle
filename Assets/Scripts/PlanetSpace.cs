@@ -114,7 +114,7 @@ public class PlanetSpace : MonoBehaviour
             Destroy(icoPlanetMesh);
         }
 
-        icoPlanetMesh = new GameObject("Planet Mesh");
+        icoPlanetMesh = new GameObject("Planet Space Mesh");
 
         MeshRenderer surfaceRenderer = icoPlanetMesh.AddComponent<MeshRenderer>();
         surfaceRenderer.material = icoMats;

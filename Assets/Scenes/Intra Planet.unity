@@ -261,7 +261,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1326169338}
-  - component: {fileID: 1326169337}
   m_Layer: 0
   m_Name: Planet Space
   m_TagString: Untagged
@@ -269,19 +268,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1326169337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326169336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2961ae779e1589d4c8471f959aba3b3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  icoMats: {fileID: 0}
 --- !u!4 &1326169338
 Transform:
   m_ObjectHideFlags: 0

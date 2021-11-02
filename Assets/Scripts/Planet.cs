@@ -13,7 +13,7 @@ public class Planet : MonoBehaviour
     public void Start()
     {
         initAsIco();
-        triDivide(6);
+        triDivide(3);
         genIcoMesh();
     }
 

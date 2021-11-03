@@ -85,6 +85,7 @@ public class Planet : MonoBehaviour
             icoPolys = newPolys;
         }
     }
+
     public int getMidInd(Dictionary<int, int> cache, int indexA, int indexB)
     {
 
@@ -109,59 +110,67 @@ public class Planet : MonoBehaviour
 
     public void genIcoMesh()
     {
-        if (icoPlanetMesh)
-        {
-            Destroy(icoPlanetMesh);
-        }
+        icoPlanetMesh = new GameObject("IcoPlanetMesh");
+        icoPlanetMesh.transform.parent = gameObject.transform;
+        icoPlanetMesh.transform.localPosition = Vector3.zero;
+        icoPlanetMesh.transform.localRotation = Quaternion.identity;
+        icoPlanetMesh.transform.localScale = Vector3.one;
 
-        icoPlanetMesh = new GameObject("Planet Mesh");
-
-        MeshRenderer surfaceRenderer = icoPlanetMesh.AddComponent<MeshRenderer>();
-        surfaceRenderer.material = icoMats;
-
-        Mesh terrainMesh = new Mesh();
+        Mesh mesh = new Mesh();
+        mesh.name = "IcoPlanetMesh";
 
         int vertexCount = icoPolys.Count * 3;
 
-        int[] indices = new int[vertexCount];
-
-        Vector3[] vertices = new Vector3[vertexCount];
-        Vector3[] normals = new Vector3[vertexCount];
+        List<Vector3> verts = new List<Vector3>();
+        List<int> tris = new List<int>();
+        List<Vector2> uvs = new List<Vector2>();
         Color32[] colors = new Color32[vertexCount];
+        List<Vector3> normals = new List<Vector3>();
 
-        Color32 green = new Color32(20,  255, 30, 255);
-        Color32 brown = new Color32(220, 150, 70, 255);
+        Color32 white = new Color32(255, 255, 255, 255);
+        Color32 blue = new Color32(100, 100, 255, 255);
 
-        for (int i = 0; i < icoPolys.Count; i++)
+        foreach (var poly in icoPolys)
         {
-            var poly = icoPolys[i];
+            int a = poly.icoVerts[0];
+            int b = poly.icoVerts[1];
+            int c = poly.icoVerts[2];
 
-            indices[i * 3 + 0] = i * 3 + 0;
-            indices[i * 3 + 1] = i * 3 + 1;
-            indices[i * 3 + 2] = i * 3 + 2;
+            verts.Add(icoVerts[a]);
+            verts.Add(icoVerts[b]);
+            verts.Add(icoVerts[c]);
 
-            vertices[i * 3 + 0] = icoVerts[poly.icoVerts[0]];
-            vertices[i * 3 + 1] = icoVerts[poly.icoVerts[1]];
-            vertices[i * 3 + 2] = icoVerts[poly.icoVerts[2]];
+            tris.Add(verts.Count - 3);
+            tris.Add(verts.Count - 2);
+            tris.Add(verts.Count - 1);
 
-            Color32 polyColor = Color32.Lerp(green, brown, Random.Range(0.0f, 1.0f)); 
+            Color32 polyColor = Color32.Lerp(blue, white, Random.Range(0.0f, 1.0f)); 
 
-            colors[i * 3 + 0] = polyColor;
-            colors[i * 3 + 1] = polyColor;
-            colors[i * 3 + 2] = polyColor;
+            colors[verts.Count - 3] = polyColor;
+            colors[verts.Count - 2] = polyColor;
+            colors[verts.Count - 1] = polyColor;
 
-            normals[i * 3 + 0] = icoVerts[poly.icoVerts[0]];
-            normals[i * 3 + 1] = icoVerts[poly.icoVerts[1]];
-            normals[i * 3 + 2] = icoVerts[poly.icoVerts[2]];
+            uvs.Add(new Vector2(0, 0));
+            uvs.Add(new Vector2(0, 1));
+            uvs.Add(new Vector2(1, 1));
         }
 
-        terrainMesh.vertices = vertices;
-        terrainMesh.normals  = normals;
-        terrainMesh.colors32 = colors;
+        mesh.vertices = verts.ToArray();
+        mesh.triangles = tris.ToArray();
+        mesh.uv = uvs.ToArray();
+        mesh.colors32 = colors;
 
-        terrainMesh.SetTriangles(indices, 0);
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
 
-        MeshFilter terrainFilter = icoPlanetMesh.AddComponent<MeshFilter>();
-        terrainFilter.mesh = terrainMesh;
+        MeshFilter meshFilter = icoPlanetMesh.AddComponent<MeshFilter>();
+        meshFilter.mesh = mesh;
+
+        MeshRenderer meshRenderer = icoPlanetMesh.AddComponent<MeshRenderer>();
+        meshRenderer.material = icoMats;
+
+        Shader shader;
+        shader = Shader.Find("Legacy Shaders/Particles/Multiply");
+        icoPlanetMesh.GetComponent<Renderer>().material.shader = shader;
     }
 }

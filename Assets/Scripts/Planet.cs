@@ -6,6 +6,7 @@ public class Planet : MonoBehaviour
 {
     public Material icoMats;
     GameObject icoPlanetMesh;
+    GameObject icoPlanet;
 
     List<Polygon> icoPolys;
     List<Vector3> icoVerts;
@@ -15,6 +16,7 @@ public class Planet : MonoBehaviour
         initAsIco();
         triDivide(3);
         genIcoMesh();
+        genIcoPlanet();
     }
 
     public void initAsIco()
@@ -121,14 +123,14 @@ public class Planet : MonoBehaviour
 
         int vertexCount = icoPolys.Count * 3;
 
+        Color32 white = new Color32(255, 255, 255, 255);
+        Color32 blue = new Color32(0, 0, 255, 255);
+
         List<Vector3> verts = new List<Vector3>();
         List<int> tris = new List<int>();
         List<Vector2> uvs = new List<Vector2>();
         Color32[] colors = new Color32[vertexCount];
         List<Vector3> normals = new List<Vector3>();
-
-        Color32 white = new Color32(255, 255, 255, 255);
-        Color32 blue = new Color32(100, 100, 255, 255);
 
         foreach (var poly in icoPolys)
         {
@@ -144,7 +146,7 @@ public class Planet : MonoBehaviour
             tris.Add(verts.Count - 2);
             tris.Add(verts.Count - 1);
 
-            Color32 polyColor = Color32.Lerp(blue, white, Random.Range(0.0f, 1.0f)); 
+            Color32 polyColor = Color32.Lerp(blue, white, Random.Range(0.0f, 1.0f));
 
             colors[verts.Count - 3] = polyColor;
             colors[verts.Count - 2] = polyColor;
@@ -168,9 +170,34 @@ public class Planet : MonoBehaviour
 
         MeshRenderer meshRenderer = icoPlanetMesh.AddComponent<MeshRenderer>();
         meshRenderer.material = icoMats;
+    }
 
-        Shader shader;
-        shader = Shader.Find("Legacy Shaders/Particles/Multiply");
-        icoPlanetMesh.GetComponent<Renderer>().material.shader = shader;
+    public void genIcoPlanet()
+    {
+        icoPlanet = new GameObject("IcoPlanet");
+        icoPlanet.transform.parent = gameObject.transform;
+        icoPlanet.transform.localRotation = Quaternion.identity;
+        icoPlanet.transform.localScale = Vector3.one;
+        float layerScale = Random.Range(0.5f, 0.9f);
+
+        int numLayers = Random.Range(2, 5);
+
+        for (int i = 0; i < numLayers; i++)
+        {
+            GameObject layer = new GameObject("IcoPlanetLayer" + i);
+            layer.transform.parent = icoPlanet.transform;
+            layer.transform.localRotation = Quaternion.identity;
+            layer.transform.localScale = Vector3.one;
+
+            MeshFilter meshFilter = layer.AddComponent<MeshFilter>();
+            meshFilter.mesh = icoPlanetMesh.GetComponent<MeshFilter>().mesh;
+
+            MeshRenderer meshRenderer = layer.AddComponent<MeshRenderer>();
+            meshRenderer.material = icoMats;
+
+            float layerScaleChange = Random.Range(0.1f, layerScale / 2.0f);
+            layerScale -= layerScaleChange;
+            layer.transform.localScale = new Vector3(layerScale, layerScale, layerScale);
+        }
     }
 }

@@ -30,6 +30,7 @@ ExportedObj/
 .consulo/
 *.csproj
 *.unityproj
+*.meta
 *.sln
 *.suo
 *.tmp
@@ -55,3 +56,14 @@ sysinfo.txt
 *.apk
 *.aab
 *.unitypackage
+
+# Crashlytics generated file
+crashlytics-build.properties
+
+# Packed Addressables
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+
+# Temporary auto-generated Android Assets
+/[Aa]ssets/[Ss]treamingAssets/aa.meta
+/[Aa]ssets/[Ss]treamingAssets/aa/*
+ProjectSettings/ProjectSettings.asset

@@ -138,7 +138,7 @@ public class PlanetDefinition : MonoBehaviour
         {
             var poly = m_Polygons[i];
 
-            indices[i * 3 + 0] = i * 3 + 0;
+            indices[i * 3] = i * 3;
             indices[i * 3 + 1] = i * 3 + 1;
             indices[i * 3 + 2] = i * 3 + 2;
 
